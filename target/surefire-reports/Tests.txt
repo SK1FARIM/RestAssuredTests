@@ -1,0 +1,29 @@
+-------------------------------------------------------------------------------
+Test set: Tests
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 7.97 s <<< FAILURE! - in Tests
+Tests.testGetPostsold  Time elapsed: 3.329 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <404>.
+
+	at Tests.testGetPostsold(Tests.java:78)
+
+Tests.testGet  Time elapsed: 1.454 s
+Tests.testPost  Time elapsed: 0.952 s
+Tests.testGetSinglePostold  Time elapsed: 0.914 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <404>.
+
+	at Tests.testGetSinglePostold(Tests.java:91)
+
+Tests.testGetRequest  Time elapsed: 0.939 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+JSON path tags doesn't match.
+Expected: null
+  Actual: <[]>
+
+	at Tests.testGetRequest(Tests.java:61)
+

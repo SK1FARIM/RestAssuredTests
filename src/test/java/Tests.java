@@ -1,6 +1,7 @@
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,57 +16,63 @@ public class Tests {
     }
 
     @Test
-    public void testGet() {
-        RestAssured.baseURI = "https://postman-echo.com";
+    @Step("Тестирование POST и GET запроса ")
+    public void testPostAndGetPet() {
+//        RestAssured.baseURI = "https://petstore.swagger.io/v2";
+        Specs.installSpec(Specs.requestSpecification("https://petstore.swagger.io", "v2"), Specs.responseSpecification());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .when()
-                .get("/get")
-                .then()
-                .statusCode(200)
-                .body("url", equalTo("https://postman-echo.com/get"))
-                .extract()
-                .response();
+        PetReq petReq = new PetReq(666, "hellDawg", "available");
 
-        System.out.println("Response body: " + response.getBody().asString());
-    }
-
-    @Test
-    @Step("Тестирование POST запроса ")
-    public void testPost() {
         // Создание POST-запроса
         Response response = RestAssured
                 .given()
+                .when()
                 .header("Content-Type", "application/json")
-                .body("{\"id\":666,\"name\":\"Helldoggie\",\"status\":\"available\"}")
-                .post("https://petstore.swagger.io/v2/pet");
+                .body(petReq)                                       //                .body("{\"id\":666,\"name\":\"Helldoggie\",\"status\":\"available\"}")
+                .post("pet");
 
         // Вывод ответа
         System.out.println("Response code: " + response.getStatusCode());
         System.out.println("Response body: " + response.getBody().asString());
+
+
+
+
+         RestAssured
+                 .given()
+//                .header("Content-Type", "application/json")
+                    .when()
+                 .header("Myheader", "ThisHeader")
+                .get("/pet/666")
+
+                    .then()
+                .statusCode(200)
+                .body("name", equalTo("hellDawg"))
+                .body("status", equalTo("available"))
+                .extract().response().as(PetRes.class);
+
+
     }
 
-    @Test
-    public void testGetRequest() {
-        RestAssured.baseURI = "https://petstore.swagger.io/v2";
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .when()
-                .get("/pet/666")
-                .then()
-                .statusCode(200)
-                .body("name", equalTo("Helldoggie"))
-                .body("status", equalTo("available"))
-                .extract()
-                .response();
+    @Test
+    public void testGet() {
+        RestAssured.baseURI = "https://postman-echo.com";
+
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .log().all()
+                        .when()
+                        .get("/get")
+                        .then()
+                        .statusCode(200)
+                        .body("url", equalTo("https://postman-echo.com/get"))
+                        .extract()
+                        .response();
 
         System.out.println("Response body: " + response.getBody().asString());
     }
-
-
-
     @Test
     public void testGetPostsold() {
         // Выполняем GET-запрос на /posts и проверяем статус код и содержимое ответа

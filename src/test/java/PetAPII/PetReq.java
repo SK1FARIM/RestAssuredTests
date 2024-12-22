@@ -1,3 +1,5 @@
+package PetAPII;
+
 public class PetReq {
     private int id;
     private String name;

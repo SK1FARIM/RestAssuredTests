@@ -77,6 +77,26 @@
             <version>2.18.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.29.1</version>
+            <scope>test</scope>
+<!--            <version>2.24.0</version>-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
 
         <!--        <dependency>-->
 <!--            <groupId>ru.yandex.qatools.allure</groupId>-->
@@ -117,10 +137,11 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <reportVersion>2.6.0</reportVersion>
-                </configuration>
+                <version>2.14.0</version>
+<!--                <version>2.9</version>-->
+<!--                <configuration>-->
+<!--                    <reportVersion>2.6.0</reportVersion>-->
+<!--                </configuration>-->
             </plugin>
 
 <!--            <plugin>-->

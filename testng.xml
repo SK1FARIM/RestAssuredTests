@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test Suite">
+    <listeners>
+        <listener class-name="LoginAPI.TestListener" />
+    </listeners>
+    <test name="Test1">
+        <classes>
+            <class name="LoginAPI.Login"/>
+        </classes>
+    </test>
+</suite>
